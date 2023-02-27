@@ -1,0 +1,6 @@
+# ORM
+peewee
+# Driver for postgres
+psycopg2-binary
+# type validator
+pydantic
