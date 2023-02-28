@@ -18,6 +18,13 @@
 
 5. Fill the data like in *.env.template*
 
+6. Create a database named as in DB_NAME:
+
+`createdb <DB_NAME>`
+
+7. Run code:
+
+`python3 main.py`
 
 ## Project in progress...
 
