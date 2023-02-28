@@ -1,6 +1,6 @@
 import peewee as pw
 
-from models.basemodel import AbstractModel
+from app.models.basemodel import AbstractModel
 
 
 class GenreModel(AbstractModel):
@@ -15,6 +15,9 @@ class PostModel(AbstractModel):
     genre = pw.ManyToManyField(GenreModel, backref='films')
 
 
-# class ThirdTable():
+GenrePosts = PostModel.genre.through_model
+
+# class GenrePosts():
 #     post_id = pw.ForeignKeyField(PostModel)
 #     genre_id = pw.ForeignKeyField(GenreModel)
+

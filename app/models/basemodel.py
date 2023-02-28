@@ -1,6 +1,6 @@
 from peewee import PostgresqlDatabase, Model
 
-from config.settings import settings
+from app.config.settings import settings
 
 db_connection = PostgresqlDatabase(settings.db_url)
 
