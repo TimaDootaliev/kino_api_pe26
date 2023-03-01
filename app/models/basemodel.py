@@ -9,7 +9,7 @@ def db(func):
     def wrapper(*args, **kwargs):
         db_connection.connect()
         try:
-            func(*args, **kwargs)
+            return func(*args, **kwargs)
         finally:
             db_connection.close()
     return wrapper
