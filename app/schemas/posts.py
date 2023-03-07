@@ -9,6 +9,8 @@ class PostAllSchema(BaseModel):
     title: str
     year: date
 
+    class Config:
+        orm_mode = True
 
 class PostOneSchema(BaseModel):
     id: int

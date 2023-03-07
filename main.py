@@ -1,3 +1,5 @@
+from datetime import date
+
 from app.models.posts.post_model import Genre, PostGenres, Post
 from app.models.basemodel import db_connection, db
 from app.queries.genres import create_genre, delete_genre, get_genres
@@ -28,5 +30,4 @@ create_tables()
 #     ['Детектив'])
 # print(get_all_films())
 # print(get_film_by_id(1))
-from datetime import date
-create_post(PostCreateSchema(title='Batman', description='Фильм про рыцаря ночи', year=date(2015, 1, 1), country='USA', genre=['Детектив', 'Ужасы']))
+# create_post(PostCreateSchema(title='Batman', description='Фильм про рыцаря ночи', year=date(2015, 1, 1), country='USA', genre=['Детектив', 'Ужасы']))
