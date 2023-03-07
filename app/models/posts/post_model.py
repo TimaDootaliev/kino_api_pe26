@@ -1,4 +1,5 @@
 import peewee as pw
+from peewee import ManyToManyQuery
 
 from app.models.basemodel import AbstractModel
 

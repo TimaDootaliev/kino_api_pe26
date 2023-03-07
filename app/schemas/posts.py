@@ -4,6 +4,12 @@ from typing import List, Any, Optional
 
 from app.models.posts.post_model import Genre
 
+class GenreSchema(BaseModel):
+    title: str | None = None
+    class Config:
+        orm_mode = True
+
+
 class PostAllSchema(BaseModel):
     id: int
     title: str
@@ -18,7 +24,7 @@ class PostOneSchema(BaseModel):
     description: str
     year: date
     country: str
-    genre: Any
+    genre: GenreSchema
 
     class Config:
         orm_mode = True

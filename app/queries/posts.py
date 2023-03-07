@@ -1,5 +1,5 @@
 from app.models.posts.post_model import Post, PostGenres, Genre
-from app.schemas.posts import PostAllSchema, PostOneSchema, PostCreateSchema
+from app.schemas.posts import PostAllSchema, PostOneSchema, PostCreateSchema, GenreSchema
 from app.models.basemodel import db
 from datetime import date
 from typing import List
@@ -28,7 +28,14 @@ def get_all_films() -> list[PostAllSchema]:
 @db
 def get_film_by_id(id) -> Post:
     post = Post.select(Post, fn.array_agg(Genre.title).alias('genre_titles')).join(PostGenres).join(Genre).where(Post.id == id).group_by(Post.id).get_or_none()
+    
+    post_other = Post.get(id=id).genre
+    print(post_other)
+    # print(PostOneSchema.from_orm(post_other))
     if post:
+        # print(post)
+        # genre = GenreSchema.from_orm(post.genre)
+        # print(genre)
         return PostOneSchema.from_orm(post)
     return None
 
