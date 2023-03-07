@@ -3,12 +3,19 @@ from app.models.basemodel import db_connection, db
 from app.queries.genres import create_genre, delete_genre, get_genres
 from app.queries.posts import create_post, get_all_films, get_film_by_id
 from app.schemas.posts import PostCreateSchema
+from app.routes.posts import router
+
+from fastapi import FastAPI
 
 @db
 def create_tables() -> None:
     db_connection.create_tables([Genre, Post, PostGenres])
 
 create_tables()
+
+app = FastAPI()
+app.include_router(router)
+
 
 # create_genre('Детектив')
 # create_genre('Ужасы')
@@ -28,5 +35,5 @@ create_tables()
 #     ['Детектив'])
 # print(get_all_films())
 # print(get_film_by_id(1))
-from datetime import date
-create_post(PostCreateSchema(title='Batman', description='Фильм про рыцаря ночи', year=date(2015, 1, 1), country='USA', genre=['Детектив', 'Ужасы']))
+# from datetime import date
+# create_post(PostCreateSchema(title='Batman', description='Фильм про рыцаря ночи', year=date(2015, 1, 1), country='USA', genre=['Детектив', 'Ужасы']))

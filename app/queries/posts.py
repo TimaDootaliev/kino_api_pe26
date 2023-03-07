@@ -41,7 +41,7 @@ def create_post(post_in: PostCreateSchema):
 def get_all_films():
     posts = Post.select(Post.id, Post.title, Post.year)
     # SELECT id, title, year FROM post;
-    return [{'id': post.id, 'title': post.title, 'year': post.year} for post in posts]
+    return [PostAllSchema.from_orm(post) for post in posts]
 
 
 @db
