@@ -5,13 +5,18 @@ from app.queries.posts import (
     )
 from app.schemas.posts import PostCreateSchema
 
+from fastapi_cache.decorator import cache
+
+
 from fastapi import APIRouter
 
 router = APIRouter()
 
 @router.get('/posts')
+@cache(20)
 def get_films():
     return get_all_films()
+
 
 @router.post('/create-post')
 def create_film(film: PostCreateSchema):

@@ -6,6 +6,9 @@ from app.schemas.posts import PostCreateSchema
 from app.routes.posts import router
 
 from fastapi import FastAPI
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
+from redis.utils import from_url
 
 @db
 def create_tables() -> None:
@@ -17,23 +20,7 @@ app = FastAPI()
 app.include_router(router)
 
 
-# create_genre('Детектив')
-# create_genre('Ужасы')
-# delete_genre('Детектив')
-# print(get_genres())
-# create_post(
-#     'Ходячие мертвецы', 
-#     "Сериал про зомби!",
-#     '2003',
-#     'USA',
-#     ['Детектив', 'Ужасы'])
-# create_post(
-#     'Шерлок Холмс', 
-#     "Сериал про детектива!",
-#     '2005',
-#     'USA',
-#     ['Детектив'])
-# print(get_all_films())
-# print(get_film_by_id(1))
-# from datetime import date
-# create_post(PostCreateSchema(title='Batman', description='Фильм про рыцаря ночи', year=date(2015, 1, 1), country='USA', genre=['Детектив', 'Ужасы']))
+@app.on_event("startup")
+async def startup():
+    redis = from_url("redis://localhost", encoding="utf8", decode_responses=True)
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
